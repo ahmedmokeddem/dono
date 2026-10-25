@@ -44,3 +44,13 @@ SQL tests start disposable PostgreSQL and apply the actual migration files. Test
 4. Future Next.js UI and graphical QR rendering/scanning remain unimplemented. Jev/hybrid and optional analytics remain deferred under the 40-hour scope.
 
 Recommended order: Supabase/Auth deployment validation → live OpenAI/photo evaluation → Next.js required flows → mobile end-to-end/resource-race checks and deployment limits. Details and assumptions are in [handoff](handoff.md).
+
+## Dernière exécution API
+
+Voir le [rapport du 25 octobre 2026](reports/api-tests-2026-10-25.md) : **97 tests réussis**, **130 vérifications HTTP curl + 17 scénarios de dates**, couverture combinée **91.56 %**. Cette campagne utilise PostgreSQL réel temporaire et des transports Auth/Supabase/OpenAI/BAN simulés. Les valeurs précédentes de ce document restent le bilan historique ; les validations hébergées restent à faire.
+
+## Vérification réelle des services
+
+La campagne [Supabase/OpenAI/BAN du 25 octobre 2026](reports/live-integrations-2026-10-25.md) a ensuite utilisé backend/.env : Auth et Data API Supabase répondent en HTTP 200, les 22 noms de fonctions Dono correspondent aux migrations locales, Google est activé, et un appel OpenAI Vision gpt-5.4-mini réussit avec validation analysis-v1. BAN réussit également. Aucune écriture hébergée. Le parcours OAuth/métier avec utilisateurs réels et l'évaluation photo restent non validés ; les mentions antérieures d'absence totale d'appel réel sont désormais historiques.
+
+Le nouvel [appel avec entrée/sortie conservées](reports/openai-example-2026-10-25/README.md) répond HTTP 200 mais échoue à la validation métier (deux indicateurs requis absents). Connectivité confirmée ; fiabilité contractuelle des réponses réelles non acquise. Le backend rejette cette sortie avec provider_invalid_output.
